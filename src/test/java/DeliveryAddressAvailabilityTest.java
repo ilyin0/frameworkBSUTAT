@@ -6,24 +6,13 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.RestaurantsPage;
 
-public class DeliveryAddressAvailaibilityTest {
-
-    RestaurantsPage page;
-
-    @BeforeTest
-    public void setupDriverAndBrowserAndSite(){
-        page = new RestaurantsPage(new ChromeDriver());
-    }
-
-    @AfterTest
-    public void quitBrowser() {
-        page.closePage();
-    }
+public class DeliveryAddressAvailabilityTest extends CommonConditions {
 
     @Test
     public void testIsAvailableDeliveryAddress() {
         SoftAssert softAssertion = new SoftAssert();
 
+        RestaurantsPage page = new RestaurantsPage(driver);
         page.openPage().closeAds();
 
         String cityName  = "МИНСК";

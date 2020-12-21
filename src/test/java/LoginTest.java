@@ -7,18 +7,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.ProfilePage;
 
-public class LoginTest {
-    WebDriver driver;
-
-    @BeforeTest
-    public void setupDriverAndBrowserAndSite(){
-        driver = new ChromeDriver();
-    }
-
-    @AfterTest
-    public void quitBrowser() {
-        driver.quit();
-    }
+public class LoginTest extends CommonConditions {
 
     @Test
     public void testLogin() {
