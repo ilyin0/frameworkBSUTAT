@@ -1,7 +1,6 @@
-import org.openqa.selenium.chrome.ChromeDriver;
+package test;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.RestaurantsPage;
