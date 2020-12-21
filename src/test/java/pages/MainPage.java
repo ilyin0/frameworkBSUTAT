@@ -1,5 +1,6 @@
 package pages;
 
+import model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +30,10 @@ public class MainPage extends AbstractPage {
         super(driver);
     }
 
-    public MainPage login(String email, String password) {
+    public MainPage login(User user) {
         divAuthorizationAndProfileButton.click();
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
+        inputEmail.sendKeys(user.getEmail());
+        inputPassword.sendKeys(user.getPassword());
         btnLogin.click();
         return this;
     }
