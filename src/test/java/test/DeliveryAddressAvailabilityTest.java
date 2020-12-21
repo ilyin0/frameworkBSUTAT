@@ -1,9 +1,11 @@
 package test;
 
+import model.Address;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.RestaurantsPage;
+import service.AddressCreator;
 
 public class DeliveryAddressAvailabilityTest extends CommonConditions {
 
@@ -11,14 +13,12 @@ public class DeliveryAddressAvailabilityTest extends CommonConditions {
     public void testIsAvailableDeliveryAddress() {
         SoftAssert softAssertion = new SoftAssert();
 
+        Address address = AddressCreator.withCredentialsFromProperties();
+
         RestaurantsPage page = new RestaurantsPage(driver);
         page.openPage().closeAds();
 
-        String cityName  = "МИНСК";
-        String streetName = "УМАНСКАЯ УЛ.";
-        int houseNumber = 37;
-
-        softAssertion.assertEquals(page.checkDeliveryAddress(cityName, streetName, houseNumber).getBtnCheckText(), "Адрес в зоне доставки", "Button text has NOT been changed");
+        softAssertion.assertEquals(page.checkDeliveryAddress(address).getBtnCheckText(), "Адрес в зоне доставки", "Button text has NOT been changed");
         Assert.assertEquals(page.getDivNotificationTitleText(), "Вы находитесь в зоне доставки", "There is notification delivery is NOT available");
     }
 }

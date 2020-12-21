@@ -1,5 +1,6 @@
 package pages;
 
+import model.Address;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,17 +47,17 @@ public class RestaurantsPage extends AbstractPage {
         return this;
     }
 
-    public RestaurantsPage checkDeliveryAddress(String cityName, String streetName, int houseNumber) {
+    public RestaurantsPage checkDeliveryAddress(Address address) {
         divStreetInput.click();
         WebElement searchInput = driver.findElement(By.xpath("//input[../div/text()=\"Поиск\"]"));
-        searchInput.sendKeys(streetName);
+        searchInput.sendKeys(address.getStreet());
 
         WebElement choiceBtn = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(d -> driver
-                        .findElement(By.xpath("//button[./div/text()=\"" + streetName + "\" and ./div/text()=\"" + cityName + "\"]")));
+                        .findElement(By.xpath("//button[./div/text()=\"" + address.getStreet() + "\" and ./div/text()=\"" + address.getCity() + "\"]")));
         choiceBtn.click();
 
-        inputHouseNumber.sendKeys(Integer.toString(houseNumber));
+        inputHouseNumber.sendKeys(Integer.toString(address.getHouseNumber()));
 
         btnCheck.click();
 
