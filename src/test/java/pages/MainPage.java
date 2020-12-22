@@ -1,6 +1,8 @@
 package pages;
 
 import model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MainPage extends AbstractPage {
 
     public static final String MAIN_PAGE_URL = "https://dominos.by";
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(className = "authorization-cta")
     private WebElement divAuthorizationAndProfileButton;
@@ -33,6 +36,7 @@ public class MainPage extends AbstractPage {
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         btnLogin.click();
+        logger.info("You are logged in");
         return this;
     }
 
