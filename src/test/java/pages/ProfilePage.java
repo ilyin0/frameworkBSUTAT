@@ -12,9 +12,6 @@ public class ProfilePage extends AbstractPage {
     @FindBy(xpath = "//input[@type=\"email\"]")
     private WebElement inputEmail;
 
-    @FindBy(xpath = "//input[..//div/text()=\"Имя\"]")
-    private WebElement inputName;
-
     protected ProfilePage(WebDriver driver) {
         super(driver);
     }
@@ -22,10 +19,6 @@ public class ProfilePage extends AbstractPage {
     public String getInputEmailText() {
         waitTime(2000);
         return inputEmail.getAttribute("value");
-    }
-
-    public String getInputNameText() {
-        return inputName.getText();
     }
 
     @Override

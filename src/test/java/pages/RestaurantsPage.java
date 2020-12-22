@@ -12,7 +12,7 @@ public class RestaurantsPage extends AbstractPage {
     @FindBy(xpath = "//div[@class=\"search-street__modal-content\"]//input[@class=\"custom-field-text__input\"]")
     private WebElement inputStreetName;
 
-    @FindBy(xpath = "//input[..//div/text()=\"Номер дома\"]")
+    @FindBy(xpath = "//*[@class='store-locator__form']/div[3]//input")
     private WebElement inputHouseNumber;
 
     @FindBy(xpath = "//*[@class='store-locator__form']/div[2]")
@@ -55,7 +55,7 @@ public class RestaurantsPage extends AbstractPage {
 
     public RestaurantsPage checkDeliveryAddress(Address address) {
         divStreetInput.click();
-        WebElement searchInput = driver.findElement(By.xpath("//input[../div/text()=\"Поиск\"]"));
+        WebElement searchInput = driver.findElement(By.xpath("//div[@class='search-street__modal-content']//input"));
         searchInput.sendKeys(address.getStreet());
 
         WebElement choiceBtn = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)

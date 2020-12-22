@@ -1,6 +1,7 @@
 package pages;
 
 import model.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,9 +24,6 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = "//button[@type=\"submit\"]")
     private WebElement btnLogin;
 
-    @FindBy(xpath = "//a[text()=\"Профиль\"]")
-    private WebElement aProfile;
-
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -40,7 +38,7 @@ public class MainPage extends AbstractPage {
 
     public ProfilePage clickAndGoToProfile() {
         waitTime(500);
-        aProfile.click();
+        divAuthorizationAndProfileButton.findElement(By.tagName("a")).click();
         return new ProfilePage(driver);
     }
 
