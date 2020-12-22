@@ -8,9 +8,7 @@ public class UserCreator {
     public static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
 
     public static User withCredentialsFromProperty() {
-        User user = new User(TestDataReader.getTestData(TESTDATA_USER_EMAIL),
+        return new User(TestDataReader.getTestData(TESTDATA_USER_EMAIL),
                 TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
-        System.out.println(user.toString());
-        return user;
     }
 }
