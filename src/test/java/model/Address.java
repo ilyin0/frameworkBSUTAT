@@ -6,9 +6,9 @@ public class Address {
 
     private String city;
     private String street;
-    private int houseNumber;
+    private String houseNumber;
 
-    public Address(String city, String street, int houseNumber) {
+    public Address(String city, String street, String houseNumber) {
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
@@ -30,11 +30,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
@@ -52,7 +52,7 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return houseNumber == address.houseNumber &&
+        return Objects.equals(houseNumber, address.houseNumber) &&
                 Objects.equals(city, address.city) &&
                 Objects.equals(street, address.street);
     }
