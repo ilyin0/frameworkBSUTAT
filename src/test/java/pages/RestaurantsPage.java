@@ -15,7 +15,7 @@ public class RestaurantsPage extends AbstractPage {
     @FindBy(xpath = "//input[..//div/text()=\"Номер дома\"]")
     private WebElement inputHouseNumber;
 
-    @FindBy(xpath = "//div[./div/text()=\"Улица\"]")
+    @FindBy(xpath = "//*[@class='store-locator__form']/div[2]")
     private WebElement divStreetInput;
 
     @FindBy(className = "store-locator__button")
@@ -47,6 +47,12 @@ public class RestaurantsPage extends AbstractPage {
         return this;
     }
 
+    public boolean isNotificationSuccess() {
+        WebElement notificationBanner = divNotification.findElement(By.className("notification__banner--success"));
+        System.out.println(notificationBanner.getAttribute("class"));
+        return notificationBanner.getAttribute("class").contains("notification__banner--success");
+    }
+
     public RestaurantsPage checkDeliveryAddress(Address address) {
         divStreetInput.click();
         WebElement searchInput = driver.findElement(By.xpath("//input[../div/text()=\"Поиск\"]"));
@@ -57,7 +63,7 @@ public class RestaurantsPage extends AbstractPage {
                         .findElement(By.xpath("//button[./div/text()=\"" + address.getStreet() + "\" and ./div/text()=\"" + address.getCity() + "\"]")));
         choiceBtn.click();
 
-        inputHouseNumber.sendKeys(Integer.toString(address.getHouseNumber()));
+        inputHouseNumber.sendKeys(address.getHouseNumber());
 
         btnCheck.click();
 

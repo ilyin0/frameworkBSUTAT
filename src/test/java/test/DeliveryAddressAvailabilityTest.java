@@ -19,6 +19,6 @@ public class DeliveryAddressAvailabilityTest extends CommonConditions {
         page.openPage().closeAds();
 
         softAssertion.assertEquals(page.checkDeliveryAddress(address).getBtnCheckText(), "Адрес в зоне доставки", "Button text has NOT been changed");
-        Assert.assertEquals(page.getDivNotificationTitleText(), "Вы находитесь в зоне доставки", "There is notification delivery is NOT available");
+        Assert.assertTrue(page.isNotificationSuccess(), "There is notification delivery is NOT available");
     }
 }
