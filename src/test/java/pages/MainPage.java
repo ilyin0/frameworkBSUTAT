@@ -20,7 +20,7 @@ public class MainPage extends AbstractPage {
     @FindBy(name = "password")
     private WebElement inputPassword;
 
-    @FindBy(xpath = "//button[@type=\"submit\" and text()=\"Войти\"]")
+    @FindBy(xpath = "//button[@type=\"submit\"]")
     private WebElement btnLogin;
 
     @FindBy(xpath = "//a[text()=\"Профиль\"]")
