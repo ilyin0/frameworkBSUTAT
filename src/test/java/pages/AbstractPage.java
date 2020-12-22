@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +30,12 @@ public abstract class AbstractPage {
     }
 
     public AbstractPage closeAds() {
-        btnCloseAds.click();
+        try {
+            btnCloseAds.click();
+        }
+        catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
