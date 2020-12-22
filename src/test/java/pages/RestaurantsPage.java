@@ -49,7 +49,6 @@ public class RestaurantsPage extends AbstractPage {
 
     public boolean isNotificationSuccess() {
         WebElement notificationBanner = divNotification.findElement(By.className("notification__banner--success"));
-        System.out.println(notificationBanner.getAttribute("class"));
         return notificationBanner.getAttribute("class").contains("notification__banner--success");
     }
 
