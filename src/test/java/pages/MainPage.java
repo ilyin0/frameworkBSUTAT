@@ -29,7 +29,7 @@ public class MainPage extends AbstractPage {
     }
 
     public MainPage login(User user) {
-        divAuthorizationAndProfileButton.click();
+        divAuthorizationAndProfileButton.findElement(By.tagName("button")).click();
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         btnLogin.click();
