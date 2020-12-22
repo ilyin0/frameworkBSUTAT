@@ -4,10 +4,13 @@ import model.User;
 
 public class UserCreator {
 
-    public static final String USER_EMAIL = "ilyintests@gmail.com";
-    public static final String USER_PASSWORD = "1722dDkK3371";
+    public static final String TESTDATA_USER_EMAIL = "testdata.user.email";
+    public static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
 
     public static User withCredentialsFromProperty() {
-        return new User(USER_EMAIL, USER_PASSWORD);
+        User user = new User(TestDataReader.getTestData(TESTDATA_USER_EMAIL),
+                TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
+        System.out.println(user.toString());
+        return user;
     }
 }
