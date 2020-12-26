@@ -14,6 +14,17 @@ import service.UserCreator;
 
 public class ProfileAddressTest extends CommonConditions {
 
+    MainPage mainPage;
+    ProfilePage profilePage;
+
+    @BeforeMethod
+    public void loginAndGoToProfile() {
+        mainPage = new MainPage(driver);
+        mainPage.openPage().closeAds();
+        profilePage = mainPage.login(UserCreator.withCredentialsFromProperty()).
+                clickAndGoToProfile();
+    }
+
     @Test
     public void testAddAddress() {
         MainPage page = new MainPage(driver);
