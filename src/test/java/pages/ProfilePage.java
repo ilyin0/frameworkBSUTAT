@@ -115,8 +115,6 @@ public class ProfilePage extends AbstractPage {
 
     public Address getLastAddedAddress() {
         waitTime(2000);
-        System.out.println(liAddressesDivs.size());
-
         return getAddressFromAddressLi(liAddressesDivs.get(0));
     }
 
@@ -143,5 +141,21 @@ public class ProfilePage extends AbstractPage {
         driver.get(PROFILE_PAGE_URL);
         waitJavascriptIsExecuted(WAIT_TIMEOUT_SECONDS);
         return this;
+    }
+
+    public ProfilePage removeAddress(int index) {
+        WebElement btnRemoveAddress = liAddressesDivs.get(index).findElement(By.xpath("//button[@aria-label='Delete']"));
+        btnRemoveAddress.click();
+
+        WebElement btnConfirmRemoving = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).
+                until(d->driver.
+                        findElement(By.className("notification__actions")).
+                        findElement(By.tagName("button")));
+        btnConfirmRemoving.click();
+        return this;
+    }
+
+    public ProfilePage removeLastAddress() {
+        return removeAddress(getAddressesCount()-1);
     }
 }
