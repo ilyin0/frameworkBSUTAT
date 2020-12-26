@@ -86,7 +86,7 @@ public class Address {
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
         return city.equalsIgnoreCase(address.city) &&
-                street.equalsIgnoreCase(address.city) &&
+                street.equalsIgnoreCase(address.street) &&
                 houseNumber.equalsIgnoreCase(address.houseNumber) &&
                 apartmentNumber.equalsIgnoreCase(address.apartmentNumber) &&
                 floor.equalsIgnoreCase(address.floor) &&
