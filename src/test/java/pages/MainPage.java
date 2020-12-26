@@ -40,6 +40,10 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
+    public String getAuthorizationAndProfileButtonText() {
+        return driver.findElement(By.xpath("//div[@class='authorization-cta']/*")).getText();
+    }
+
     public ProfilePage clickAndGoToProfile() {
         waitTime(500);
         divAuthorizationAndProfileButton.findElement(By.tagName("a")).click();
