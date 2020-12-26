@@ -108,6 +108,11 @@ public class ProfilePage extends AbstractPage {
                 getText().equals("\u0410\u0434\u0440\u0435\u0441 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d");
     }
 
+    public int getAddressesCount() {
+        waitTime(500);
+        return liAddressesDivs.size();
+    }
+
     public Address getLastAddedAddress() {
         waitTime(2000);
         System.out.println(liAddressesDivs.size());
