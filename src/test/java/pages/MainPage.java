@@ -27,6 +27,9 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = "//button[@type=\"submit\"]")
     private WebElement btnLogin;
 
+    @FindBy(className = "cart-button")
+    private WebElement divCartButton;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
