@@ -18,6 +18,8 @@ public abstract class AbstractPage {
     @FindBy(className = "modal__close")
     private WebElement btnCloseAds;
 
+    private final By btnAdsClose = By.className("modal__close");
+
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -31,11 +33,9 @@ public abstract class AbstractPage {
 
     public AbstractPage closeAds() {
         try {
-            btnCloseAds.click();
+            waitAndGet(btnAdsClose).click();
         }
-        catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
+        catch (NoSuchElementException ignored) {}
         return this;
     }
 
