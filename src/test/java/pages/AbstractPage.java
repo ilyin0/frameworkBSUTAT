@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -64,9 +61,20 @@ public abstract class AbstractPage {
         }
     }
 
-    protected AbstractPage clickAndGo(WebElement clickableWebElement) {
-        clickableWebElement.click();
-        return this;
+    protected WebElement waitAndGet(By by, long timeoutInSeconds, long sleepTimeInMillis) {
+        return new WebDriverWait(driver, timeoutInSeconds, sleepTimeInMillis).until(d->driver.findElement(by));
+    }
+
+    protected WebElement waitAndGet(By by, long timeoutInSeconds) {
+        return new WebDriverWait(driver, timeoutInSeconds).until(d->driver.findElement(by));
+    }
+
+    protected WebElement waitAndGet(By by) {
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(d->driver.findElement(by));
+    }
+
+    protected WebElement waitAndGet(WebElement parent, By by) {
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(d->parent.findElement(by));
     }
 
 }
