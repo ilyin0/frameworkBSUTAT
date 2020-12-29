@@ -37,12 +37,24 @@ public class MainPage extends AbstractPage {
     @FindBy(className = "cart-button")
     private WebElement divCartButton;
 
+    private static final String pizzaProductCardStringLocator = "//div[@class='product-card__title'][text()='%s']/parent::div/parent::div";
+
+    private final By miniBagLocator = By.className("cart-button__mini-bag");
+    private final By pizzasInMiniBagLocator = By.className("product-card--mini-bag");
+    private final By pizzaNameOnCardLocator = By.className("product-card__title");
+    private final By pizzaDescriptionOnCardLocator = By.className("product-card__description");
+    private final By btnRemovePizzaFromCartInCardLocator = By.className("product-card__button-close");
+    private final By pizzaCardTitleLocator = By.className("product-card__title");
+    private final By addToCartInCardButtonLocator = By.className("product-card__actions");
+    private final By loginButtonLocator = By.xpath("//button[text()='Войти']");
+    private final By profileButtonDivLocator = By.xpath("//a[@href='/user']/parent::*");
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
     public MainPage login(User user) {
-        divAuthorizationAndProfileButton.findElement(By.tagName("button")).click();
+        waitAndGet(loginButtonLocator).click();
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         btnLogin.click();
@@ -55,8 +67,7 @@ public class MainPage extends AbstractPage {
     }
 
     public ProfilePage clickAndGoToProfile() {
-        waitTime(500);
-        divAuthorizationAndProfileButton.findElement(By.tagName("a")).click();
+        waitAndGet(waitAndGet(profileButtonDivLocator), By.tagName("a")).click();
         return new ProfilePage(driver);
     }
 
@@ -84,7 +95,7 @@ public class MainPage extends AbstractPage {
         Select selectSidetype = new Select(selectList.get(1));
         selectSidetype.selectByValue(pizza.getSideType());
 
-        pizzaCard.findElement(By.className("product-card__actions")).click();
+        pizzaCard.findElement(addToCartInCardButtonLocator).click();
 
         return this;
     }
@@ -96,7 +107,7 @@ public class MainPage extends AbstractPage {
 
     public boolean isCartOpened() {
         try {
-            driver.findElement(By.className("cart-button__mini-bag"));
+            driver.findElement(miniBagLocator);
         } catch (NoSuchElementException e) {
             return false;
         }
@@ -109,12 +120,12 @@ public class MainPage extends AbstractPage {
 
     public List<WebElement> getInCartPizzasCards() {
         openCart();
-        return driver.findElements(By.className("product-card--mini-bag"));
+        return driver.findElements(pizzasInMiniBagLocator);
     }
 
     public Pizza getPizzaFromMiniBagCard(WebElement pizzaCard) {
-        String name = pizzaCard.findElement(By.className("product-card__title")).getText();
-        String description = pizzaCard.findElement(By.className("product-card__description")).getText();
+        String name = pizzaCard.findElement(pizzaNameOnCardLocator).getText();
+        String description = pizzaCard.findElement(pizzaDescriptionOnCardLocator).getText();
         String[] sidetypeAndSize = description.split(", ");
         String sidetype = sidetypeAndSize[0];
         String size = sidetypeAndSize[1];
@@ -135,7 +146,7 @@ public class MainPage extends AbstractPage {
     }
 
     public String getPizzaNameFromMiniBagCard(WebElement pizzaCard) {
-        return pizzaCard.findElement(By.className("product-card__title")).getText();
+        return pizzaCard.findElement(pizzaCardTitleLocator).getText();
     }
 
     public WebElement getPizzaMiniBagCard(String name) {
@@ -147,7 +158,7 @@ public class MainPage extends AbstractPage {
 
     public MainPage removePizzaFromCart(String name) {
         WebElement pizzaCard = getPizzaMiniBagCard(name);
-        pizzaCard.findElement(By.className("product-card__button-close")).click();
+        pizzaCard.findElement(btnRemovePizzaFromCartInCardLocator).click();
         return this;
     }
 
