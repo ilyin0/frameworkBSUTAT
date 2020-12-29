@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractPage {
@@ -65,12 +66,24 @@ public abstract class AbstractPage {
         return new WebDriverWait(driver, timeoutInSeconds, sleepTimeInMillis).until(d->driver.findElement(by));
     }
 
+    protected List<WebElement> waitAndGets(By by, long timeoutInSeconds) {
+        return new WebDriverWait(driver, timeoutInSeconds).until(d->driver.findElements(by));
+    }
+
+    protected List<WebElement> waitAndGets(By by) {
+        return waitAndGets(by, WAIT_TIMEOUT_SECONDS);
+    }
+
+    protected List<WebElement> waitAndGets(WebElement parent, By by) {
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(d->parent.findElements(by));
+    }
+
     protected WebElement waitAndGet(By by, long timeoutInSeconds) {
         return new WebDriverWait(driver, timeoutInSeconds).until(d->driver.findElement(by));
     }
 
     protected WebElement waitAndGet(By by) {
-        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(d->driver.findElement(by));
+        return waitAndGet(by, WAIT_TIMEOUT_SECONDS);
     }
 
     protected WebElement waitAndGet(WebElement parent, By by) {
