@@ -17,6 +17,6 @@ public class LogoutTest extends CommonConditions {
         page.login(user).
                 clickAndGoToProfile().
                 logout();
-        Assert.assertEquals(page.getAuthorizationAndProfileButtonText(),"\u0412\u043e\u0439\u0442\u0438");
+        Assert.assertFalse(page.isAuthorized(),"User is authorized");
     }
 }
