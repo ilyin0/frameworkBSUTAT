@@ -20,11 +20,6 @@ public class MainPage extends AbstractPage {
     public static final String MAIN_PAGE_URL = "https://dominos.by";
     private final Logger logger = LogManager.getRootLogger();
 
-    private static final String pizzaProductCardStringLocator = "//div[@class='product-card__title'][text()='%s']/parent::div/parent::div";
-
-    @FindBy(className = "authorization-cta")
-    private WebElement divAuthorizationAndProfileButton;
-
     @FindBy(name = "email")
     private WebElement inputEmail;
 
@@ -60,10 +55,6 @@ public class MainPage extends AbstractPage {
         btnLogin.click();
         logger.info("You are logged in");
         return this;
-    }
-
-    public String getAuthorizationAndProfileButtonText() {
-        return driver.findElement(By.xpath("//div[@class='authorization-cta']/*")).getText();
     }
 
     public ProfilePage clickAndGoToProfile() {
@@ -164,5 +155,16 @@ public class MainPage extends AbstractPage {
 
     public MainPage removePizzaFromCart(Pizza pizza) {
         return removePizzaFromCart(pizza.getName());
+    }
+
+    public boolean isAuthorized() {
+        try {
+            driver.findElement(profileButtonDivLocator);
+            return true;
+        }
+        catch (NoSuchElementException ignored) {
+            driver.findElement(loginButtonLocator);
+            return false;
+        }
     }
 }
