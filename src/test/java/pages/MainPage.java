@@ -20,6 +20,8 @@ public class MainPage extends AbstractPage {
     public static final String MAIN_PAGE_URL = "https://dominos.by";
     private final Logger logger = LogManager.getRootLogger();
 
+    private static final String pizzaProductCardStringLocator = "//div[@class='product-card__title'][text()='%s']/parent::div/parent::div";
+
     @FindBy(className = "authorization-cta")
     private WebElement divAuthorizationAndProfileButton;
 
@@ -70,7 +72,7 @@ public class MainPage extends AbstractPage {
     }
 
     public WebElement getPizzaProductCard(String pizzaName) {
-        return waitAndGet(By.xpath("//div[@class='product-card__title'][text()='" + pizzaName + "']/parent::div/parent::div"));
+        return waitAndGet(By.xpath(String.format(pizzaProductCardStringLocator, pizzaName)));
     }
 
     public MainPage addPizzaToCard(Pizza pizza) {
